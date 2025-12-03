@@ -1,4 +1,4 @@
-import { Home, IndianRupee, Filter } from "lucide-react";
+import { Home, CircleDollarSign, Filter } from "lucide-react";
 import { motion } from "framer-motion";
 
 const propertyTypes = ["House", "Apartment", "Villa", "Office"];
@@ -87,7 +87,7 @@ const FilterSection = ({ filters, setFilters, onApplyFilters }) => {
         {/* Price Range */}
         <div className="filter-group">
           <label className="filter-label">
-            <PakistanRupee className="w-4 h-4 mr-2" />
+            <CircleDollarSign className="w-4 h-4 mr-2" />
             Price Range
           </label>
           <div className="grid grid-cols-2 gap-2">
