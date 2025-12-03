@@ -10,7 +10,6 @@ const popularLocations = [
   "Delhi", 
   "Bangalore",
   "Hyderabad",
-  "Chennai"
 ];
 
 const quickFilters = [
@@ -212,7 +211,7 @@ const Hero = () => {
               {/* Enhanced Search Section */}
               <motion.div
                 variants={itemVariants}
-                className="relative max-w-4xl mx-auto mb-16"
+                className="relative max-w-4xl mx-auto mb-16 z-50"
               >
                 <div className="bg-white/95 backdrop-blur-md rounded-3xl p-6 shadow-2xl border border-white/50">
                   {/* Property Type Filters */}
@@ -292,8 +291,8 @@ const Hero = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -10, scale: 0.98 }}
                         transition={{ duration: 0.3, ease: "easeOut" }}
-                        className="absolute left-6 right-6 top-full mt-4 bg-white/98 backdrop-blur-md 
-                          rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-50"
+                        className="absolute left-6 right-6 top-full mt-4 bg-white backdrop-blur-md 
+                          rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-[9999]"
                       >
                         <div className="p-6">
                           <div className="flex items-center justify-between mb-4">
@@ -344,7 +343,7 @@ const Hero = () => {
               {/* Stats Section */}
               <motion.div
                 variants={containerVariants}
-                className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto"
+                className="relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto"
               >
                 {stats.map((stat, index) => (
                   <motion.div
