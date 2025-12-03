@@ -1,9 +1,9 @@
 <div align="center">
 
 <!-- Hero Banner -->
-<img src="./frontend/src/assets/home-regular-24.png" width="80" height="80" alt="BuildEstate Logo">
+<img src="./frontend/src/assets/home-regular-24.png" width="80" height="80" alt="Propertia Logo">
 
-# 🏠 BuildEstate
+# 🏠 Propertia
 
 <h3 align="center">
   <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=28&pause=1000&color=3B82F6&center=true&vCenter=true&width=600&lines=Next-Generation+Real+Estate;AI-Powered+Property+Analysis;Modern+Full-Stack+Platform" alt="Typing SVG" />
@@ -81,7 +81,7 @@
 
 ## 🌟 Overview
 
-> **BuildEstate** is a cutting-edge, full-stack real estate platform that transforms property discovery and management through AI-powered insights, seamless user experience, and comprehensive administrative tools.
+> **Propertia** is a cutting-edge, full-stack real estate platform that transforms property discovery and management through AI-powered insights, seamless user experience, and comprehensive administrative tools.
 
 
 <summary><h3>🎯 Key Features</h3></summary>
@@ -399,11 +399,11 @@ FIRECRAWL_API_KEY=your_key
 VITE_API_BASE_URL=http://localhost:4000
 
 # 🏷️ App Settings
-VITE_APP_NAME=BuildEstate
+VITE_APP_NAME=Propertia
 
 # 🎨 Customization
 VITE_THEME_COLOR=#3B82F6
-VITE_BRAND_NAME=BuildEstate
+VITE_BRAND_NAME=Propertia
 ```
 
 </td>
@@ -415,7 +415,7 @@ VITE_BACKEND_URL=http://localhost:4000
 
 # 👨‍💼 Admin Settings
 VITE_ADMIN_EMAIL=admin@buildestate.com
-VITE_ADMIN_NAME=BuildEstate Admin
+VITE_ADMIN_NAME=Propertia Admin
 ```
 
 </td>
@@ -953,7 +953,7 @@ We love contributions! Please see our [Contributing Guidelines](./CONTRIBUTING.m
 
 <div align="center">
 
-**Thanks to all contributors who have made BuildEstate better! 🎉**
+**Thanks to all contributors who have made Propertia better! 🎉**
 
 <a href="https://github.com/AAYUSH412/Real-Estate-Website/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=AAYUSH412/Real-Estate-Website" alt="Contributors">
@@ -1053,7 +1053,7 @@ This project is licensed under the **MIT License**
 <!-- Call to Action -->
 <div align="center">
   
-### ⭐ **If you find BuildEstate helpful, please give it a star!** ⭐
+### ⭐ **If you find Propertia helpful, please give it a star!** ⭐
 
 <a href="https://github.com/AAYUSH412/Real-Estate-Website">
   <img src="https://img.shields.io/github/stars/AAYUSH412/Real-Estate-Website?style=for-the-badge&logo=github&color=FFD700" alt="GitHub Stars">

@@ -124,7 +124,7 @@ const Login = () => {
               Admin Portal
             </h1>
             <p className="text-gray-600 text-sm">
-              Sign in to manage BuildEstate properties
+              Sign in to manage Propertia properties
             </p>
           </motion.div>
 
@@ -218,7 +218,7 @@ const Login = () => {
           {/* Footer */}
           <motion.div variants={itemVariants} className="mt-8 text-center">
             <p className="text-xs text-gray-500">
-              Secure admin access • BuildEstate © 2025
+              Secure admin access • Propertia © 2025
             </p>
           </motion.div>
         </div>

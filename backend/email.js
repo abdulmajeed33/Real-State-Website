@@ -3,7 +3,7 @@ export const getSchedulingEmailTemplate = (appointment, date, time, notes) => `
     <!-- Header with Background -->
     <div style="background: linear-gradient(135deg, #2563eb, #1e40af); padding: 40px 20px; border-radius: 15px 15px 0 0; text-align: center;">
       <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 700;">Viewing Scheduled</h1>
-      <p style="color: #ffffff; opacity: 0.9; margin: 10px 0 0 0; font-size: 16px;">BuildEstate Property Viewing</p>
+      <p style="color: #ffffff; opacity: 0.9; margin: 10px 0 0 0; font-size: 16px;">Propertia Property Viewing</p>
     </div>
 
     <!-- Main Content -->
@@ -62,7 +62,7 @@ export const getSchedulingEmailTemplate = (appointment, date, time, notes) => `
     <!-- Footer -->
     <div style="text-align: center; margin-top: 30px;">
       <p style="color: #6b7280; font-size: 14px;">
-        © ${new Date().getFullYear()} BuildEstate. All rights reserved.
+        © ${new Date().getFullYear()} Propertia. All rights reserved.
       </p>
       <div style="margin-top: 10px;">
         <a href="https://real-estate-website-sepia-two.vercel.app" style="color: #2563eb; text-decoration: none; margin: 0 10px;">Website</a>
@@ -79,7 +79,7 @@ export const getEmailTemplate = (appointment, status) => `
     <!-- Header with Background -->
     <div style="background: linear-gradient(135deg, #2563eb, #1e40af); padding: 40px 20px; border-radius: 15px 15px 0 0; text-align: center;">
       <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 700;">Appointment ${status.charAt(0).toUpperCase() + status.slice(1)}</h1>
-      <p style="color: #ffffff; opacity: 0.9; margin: 10px 0 0 0; font-size: 16px;">BuildEstate Property Viewing</p>
+      <p style="color: #ffffff; opacity: 0.9; margin: 10px 0 0 0; font-size: 16px;">Propertia Property Viewing</p>
     </div>
 
     <!-- Main Content -->
@@ -153,7 +153,7 @@ export const getEmailTemplate = (appointment, status) => `
     <!-- Footer -->
     <div style="text-align: center; margin-top: 30px;">
       <p style="color: #6b7280; font-size: 14px;">
-        © ${new Date().getFullYear()} BuildEstate. All rights reserved.
+        © ${new Date().getFullYear()} Propertia. All rights reserved.
       </p>
       <div style="margin-top: 10px;">
         <a href="https://real-estate-website-sepia-two.vercel.app" style="color: #2563eb; text-decoration: none; margin: 0 10px;">Website</a>
@@ -168,7 +168,7 @@ export const getNewsletterTemplate = (email) => `
 <div style="max-width: 600px; margin: 20px auto; font-family: 'Arial', sans-serif; line-height: 1.6;">
   <!-- Header with Background -->
   <div style="background: linear-gradient(135deg, #2563eb, #1e40af); padding: 40px 20px; border-radius: 15px 15px 0 0; text-align: center;">
-    <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 700;">Welcome to BuildEstate!</h1>
+    <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 700;">Welcome to Propertia!</h1>
     <p style="color: #ffffff; opacity: 0.9; margin: 10px 0 0 0; font-size: 16px;">Your Premier Real Estate Newsletter</p>
   </div>
 
@@ -237,7 +237,7 @@ export const getNewsletterTemplate = (email) => `
       </a>
     </div>
     <p style="color: #6b7280; font-size: 14px; margin: 0;">
-      © ${new Date().getFullYear()} BuildEstate. All rights reserved.
+      © ${new Date().getFullYear()} Propertia. All rights reserved.
     </p>
     <p style="color: #6b7280; font-size: 12px; margin-top: 10px;">
       You can <a href="#" style="color: #2563eb; text-decoration: none;">unsubscribe</a> at any time.
@@ -250,7 +250,7 @@ export const getWelcomeTemplate = (name) => `
 <div style="max-width: 600px; margin: 20px auto; font-family: 'Arial', sans-serif; line-height: 1.6;">
   <!-- Header with Background -->
   <div style="background: linear-gradient(135deg, #2563eb, #1e40af); padding: 40px 20px; border-radius: 15px 15px 0 0; text-align: center;">
-    <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 700;">Welcome to BuildEstate!</h1>
+    <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 700;">Welcome to Propertia!</h1>
     <p style="color: #ffffff; opacity: 0.9; margin: 10px 0 0 0; font-size: 16px;">Your Dream Home Awaits</p>
   </div>
 
@@ -322,7 +322,7 @@ export const getWelcomeTemplate = (name) => `
       </a>
     </div>
     <p style="color: #6b7280; font-size: 14px; margin: 0;">
-      © ${new Date().getFullYear()} BuildEstate. All rights reserved.
+      © ${new Date().getFullYear()} Propertia. All rights reserved.
     </p>
     <div style="margin-top: 10px;">
       <a href="#" style="color: #2563eb; text-decoration: none; margin: 0 10px;">Privacy Policy</a>
@@ -337,7 +337,7 @@ export const getPasswordResetTemplate = (resetUrl) => `
     <!-- Header with Background -->
     <div style="background: linear-gradient(135deg, #2563eb, #1e40af); padding: 40px 20px; border-radius: 15px 15px 0 0; text-align: center;">
       <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 700;">Reset Your Password</h1>
-      <p style="color: #ffffff; opacity: 0.9; margin: 10px 0 0 0; font-size: 16px;">BuildEstate Account Security</p>
+      <p style="color: #ffffff; opacity: 0.9; margin: 10px 0 0 0; font-size: 16px;">Propertia Account Security</p>
     </div>
 
     <!-- Main Content -->
@@ -346,7 +346,7 @@ export const getPasswordResetTemplate = (resetUrl) => `
       <div style="background: #f0f7ff; border-left: 4px solid #2563eb; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
         <h2 style="color: #1e40af; margin: 0 0 15px 0; font-size: 20px;">Password Reset Request</h2>
         <p style="margin: 8px 0; color: #374151;">
-          We received a request to reset your password for your BuildEstate account. For your security, this link will expire in 10 minutes.
+          We received a request to reset your password for your Propertia account. For your security, this link will expire in 10 minutes.
         </p>
       </div>
 
@@ -389,7 +389,7 @@ export const getPasswordResetTemplate = (resetUrl) => `
     <!-- Footer -->
     <div style="text-align: center; margin-top: 30px;">
       <p style="color: #6b7280; font-size: 14px;">
-        © ${new Date().getFullYear()} BuildEstate. All rights reserved.
+        © ${new Date().getFullYear()} Propertia. All rights reserved.
       </p>
       <div style="margin-top: 10px;">
         <a href="https://real-estate-website-sepia-two.vercel.app" style="color: #2563eb; text-decoration: none; margin: 0 10px;">Website</a>

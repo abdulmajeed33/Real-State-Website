@@ -1,6 +1,6 @@
 <div align="center">
 
-# ⚙️ BuildEstate Backend
+# ⚙️ Propertia Backend
 
 ### Robust Node.js API Server with AI Integration
 
@@ -103,7 +103,7 @@ Create `.env.local` file with the following variables:
 # Application
 NODE_ENV=development
 PORT=4000
-APP_NAME=BuildEstate API
+APP_NAME=Propertia API
 
 # Database Configuration
 MONGODB_URI=mongodb://localhost:27017/buildestate
@@ -695,7 +695,7 @@ pm2 logs buildestate-api
 
 <div align="center">
 
-**Powering BuildEstate with robust API architecture**
+**Powering Propertia with robust API architecture**
 
 [⭐ Star](https://github.com/AAYUSH412/Real-Estate-Website) • [🐛 Issues](https://github.com/AAYUSH412/Real-Estate-Website/issues) • [📖 Docs](../README.md)
 
@@ -711,4 +711,4 @@ pm2 logs buildestate-api
 
 ---
 
-Built with ❤️ for BuildEstate
+Built with ❤️ for Propertia

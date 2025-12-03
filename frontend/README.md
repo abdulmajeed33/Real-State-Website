@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌐 BuildEstate Frontend
+# 🌐 Propertia Frontend
 
 ### Modern React Application for Real Estate Platform
 
@@ -89,7 +89,7 @@ Create a `.env.local` file in the frontend directory:
 ```bash
 # API Configuration
 VITE_API_URL=http://localhost:4000/api
-VITE_APP_NAME=BuildEstate
+VITE_APP_NAME=Propertia
 
 # External Services (Optional)
 VITE_IMAGEKIT_URL=your-imagekit-url
@@ -325,7 +325,7 @@ Set these in your deployment platform:
 
 ```bash
 VITE_API_URL=https://your-api-domain.com/api
-VITE_APP_NAME=BuildEstate
+VITE_APP_NAME=Propertia
 VITE_IMAGEKIT_URL=https://your-imagekit-url
 VITE_GOOGLE_MAPS_API_KEY=your-production-maps-key
 VITE_ENVIRONMENT=production

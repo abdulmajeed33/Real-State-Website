@@ -1,4 +1,4 @@
-# BuildEstate API Testing Guide
+# Propertia API Testing Guide
 
 This guide provides examples for testing all API endpoints using curl, Postman, or any HTTP client.
 
@@ -400,7 +400,7 @@ curl -X GET $BASE_URL/status
 #!/bin/bash
 # Quick API health check
 
-echo "Testing BuildEstate API..."
+echo "Testing Propertia API..."
 
 # Health check
 echo "1. Health check:"

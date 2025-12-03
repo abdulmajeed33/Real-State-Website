@@ -1,10 +1,10 @@
-# BuildEstate - Complete Project Setup Guide
+# Propertia - Complete Project Setup Guide
 
 
 
 <div align="center">
-  <img src="./frontend/src/assets/home-regular-24.png" alt="BuildEstate Logo" width="100" />
-  <h1>🏢 BuildEstate Real Estate Platform</h1>
+  <img src="./frontend/src/assets/home-regular-24.png" alt="Propertia Logo" width="100" />
+  <h1>🏢 Propertia Real Estate Platform</h1>
   <p><em>A comprehensive real estate platform with AI-powered insights, user management, and admin dashboard</em></p>
 </div>
 
@@ -29,7 +29,7 @@
 
 ## 🎯 Project Overview
 
-BuildEstate is a modern, full-stack real estate platform consisting of three main applications:
+Propertia is a modern, full-stack real estate platform consisting of three main applications:
 
 ### 🌐 **Frontend** (User Portal)
 - Property listings and search
@@ -58,7 +58,7 @@ BuildEstate is a modern, full-stack real estate platform consisting of three mai
 ## 🏗️ Architecture
 
 ```
-BuildEstate/
+Propertia/
 ├── frontend/          # React.js user interface (Port: 5173)
 ├── admin/            # React.js admin dashboard (Port: 5174)
 ├── backend/          # Express.js API server (Port: 4000)
@@ -485,7 +485,7 @@ DEBUG=buildestate:*
 ## 📁 Project Structure
 
 ```
-BuildEstate/
+Propertia/
 ├── backend/
 │   ├── config/           # Database and service configurations
 │   ├── controllers/      # Route handlers

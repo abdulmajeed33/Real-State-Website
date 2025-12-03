@@ -172,7 +172,7 @@ const Navbar = () => {
               transition={{ duration: 0.5 }}
               className="relative p-2.5 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg group-hover:shadow-blue-500/30"
             >
-              <img src={logo} alt="BuildEstate logo" className="w-6 h-6 brightness-0 invert" />
+              <img src={logo} alt="Propertia logo" className="w-6 h-6 brightness-0 invert" />
               {/* Floating sparkles */}
               <motion.div
                 animate={floatingAnimation}
@@ -183,7 +183,7 @@ const Navbar = () => {
             </motion.div>
             <div className="flex flex-col">
               <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent group-hover:from-indigo-600 group-hover:via-blue-600 group-hover:to-purple-600 transition-all duration-500">
-                BuildEstate
+                Propertia
               </span>
               <span className="text-xs text-gray-500 font-medium -mt-1">
                 Premium Properties
@@ -254,7 +254,7 @@ const Navbar = () => {
                       </div>
                       <div className="hidden lg:flex flex-col items-start">
                         <span className="text-sm font-semibold text-gray-700">{user?.name}</span>
-                        <span className="text-xs text-gray-500">Premium Member</span>
+                        {/* <span className="text-xs text-gray-500">Premium Member</span> */}
                       </div>
                       <motion.div
                         animate={{ rotate: isDropdownOpen ? 180 : 0 }}
@@ -283,10 +283,10 @@ const Navbar = () => {
                               <div className="flex-1">
                                 <p className="text-sm font-bold text-gray-900">{user?.name}</p>
                                 <p className="text-xs text-gray-600 truncate">{user?.email}</p>
-                                <div className="flex items-center gap-1 mt-1">
+                                {/* <div className="flex items-center gap-1 mt-1">
                                   <Crown className="w-3 h-3 text-yellow-500" />
                                   <span className="text-xs text-yellow-600 font-medium">Premium</span>
-                                </div>
+                                </div> */}
                               </div>
                             </div>
                           </div>
@@ -815,10 +815,10 @@ const MobileNavLinks = ({
                 <div className="flex-1">
                   <p className="text-lg font-bold text-gray-900">{user?.name}</p>
                   <p className="text-sm text-gray-600 truncate">{user?.email}</p>
-                  <div className="flex items-center gap-2 mt-1">
+                  {/* <div className="flex items-center gap-2 mt-1">
                     <Crown className="w-4 h-4 text-yellow-500" />
                     <span className="text-xs text-yellow-600 font-semibold">Premium Member</span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               {/* Background decoration */}

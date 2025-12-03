@@ -1,12 +1,12 @@
-# 🚀 How to Run BuildEstate Project - Complete Guide
+# 🚀 How to Run Propertia Project - Complete Guide
 
 
 
-This guide provides step-by-step instructions to run the complete BuildEstate real estate platform locally.
+This guide provides step-by-step instructions to run the complete Propertia real estate platform locally.
 
 ## 📋 Project Components
 
-BuildEstate consists of three main applications:
+Propertia consists of three main applications:
 
 1. **Backend API** (Port 4000) - Express.js server with MongoDB
 2. **Frontend** (Port 5173) - React user interface  
