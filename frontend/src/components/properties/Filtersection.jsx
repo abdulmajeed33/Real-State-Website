@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 const propertyTypes = ["House", "Apartment", "Villa", "Office"];
 const availabilityTypes = ["Rent", "Buy", "Lease"];
 const priceRanges = [
-  { min: 0, max: 5000000, label: "Under ₹50L" },
-  { min: 5000000, max: 10000000, label: "₹50L - ₹1Cr" },
-  { min: 10000000, max: 20000000, label: "₹1Cr - ₹2Cr" },
-  { min: 20000000, max: Number.MAX_SAFE_INTEGER, label: "Above ₹2Cr" }
+  { min: 0, max: 5000000, label: "Under Rs 50L" },
+  { min: 5000000, max: 10000000, label: "Rs 50L - Rs 1Cr" },
+  { min: 10000000, max: 20000000, label: "Rs 1Cr - Rs 2Cr" },
+  { min: 20000000, max: Number.MAX_SAFE_INTEGER, label: "Above Rs 2Cr" }
 ];
 
 const FilterSection = ({ filters, setFilters, onApplyFilters }) => {
@@ -87,7 +87,7 @@ const FilterSection = ({ filters, setFilters, onApplyFilters }) => {
         {/* Price Range */}
         <div className="filter-group">
           <label className="filter-label">
-            <IndianRupee className="w-4 h-4 mr-2" />
+            <PakistanRupee className="w-4 h-4 mr-2" />
             Price Range
           </label>
           <div className="grid grid-cols-2 gap-2">

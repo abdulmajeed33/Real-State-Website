@@ -297,7 +297,7 @@ const PropertyListings = () => {
               <div>
                 <p className="text-sm font-medium text-gray-600">Avg. Price</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  ₹{properties.length > 0 ? Math.round(properties.reduce((sum, p) => sum + p.price, 0) / properties.length / 100000) : 0}L
+                  Rs {properties.length > 0 ? Math.round(properties.reduce((sum, p) => sum + p.price, 0) / properties.length / 100000) : 0}L
                 </p>
               </div>
               <div className="p-3 bg-orange-50 rounded-xl">
@@ -513,7 +513,7 @@ const PropertyListings = () => {
                           </div>
                           <div className="flex items-center justify-between">
                             <p className="text-3xl font-bold text-gray-900">
-                              ₹{property.price.toLocaleString()}
+                              Rs {property.price.toLocaleString()}
                             </p>
                             <div className="flex items-center gap-1">
                               <Eye className="w-4 h-4 text-gray-400" />

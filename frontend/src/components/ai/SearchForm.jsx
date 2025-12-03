@@ -162,7 +162,7 @@ const SearchForm = ({ onSearch, isLoading }) => {
           <div>
             <label className="flex items-center text-sm font-medium text-gray-700 mb-2 sm:mb-4">
               <IndianRupee className="w-4 h-4 mr-1.5 text-blue-600" />
-              Price Range: ₹{searchParams.maxPrice} Cr
+              Price Range: Rs {searchParams.maxPrice} Cr
             </label>
             <input
               type="range"
@@ -174,8 +174,8 @@ const SearchForm = ({ onSearch, isLoading }) => {
               className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
             />
             <div className="flex justify-between text-xs text-gray-500 mt-1">
-              <span>₹50L</span>
-              <span>₹50Cr</span>
+              <span>Rs 50L</span>
+              <span>Rs 50Cr</span>
             </div>
           </div>
         </div>

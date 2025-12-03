@@ -42,7 +42,7 @@ const StructuredData = ({ type, data }) => {
         addressRegion: data?.region || 'Region',
         addressCountry: 'IN'
       },
-      price: data?.price ? `₹${data.price}` : '',
+      price: data?.price ? `Rs ${data.price}` : '',
       floorSize: {
         '@type': 'QuantitativeValue',
         unitText: 'SQFT',
