@@ -1,33 +1,29 @@
-import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
+import { useContext } from 'react';
+import AuthContext from '../contexts/AuthContext';
 
 const ProtectedRoute = () => {
-  const token = localStorage.getItem('token');
-  const isAdmin = localStorage.getItem('isAdmin');
+  const { isAuthenticated, isLoading } = useContext(AuthContext);
 
-  // Check both token and admin status
-  const isAuthenticated = token && isAdmin === 'true';
+  // Show loading state while checking authentication
+  // This is crucial for URL token processing
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
+          <p className="text-gray-600">Verifying authentication...</p>
+        </div>
+      </div>
+    );
+  }
 
-  // Verify token expiration
-  const isTokenExpired = () => {
-    if (!token) return true;
-    try {
-      const tokenData = JSON.parse(atob(token.split('.')[1]));
-      return tokenData.exp * 1000 < Date.now();
-    } catch (error) {
-      console.error('Error verifying token:', error);
-      return true;
-    }
-  };
-
-  if (!isAuthenticated || isTokenExpired()) {
-    // Clean up storage on invalid auth
-    localStorage.removeItem('token');
-    localStorage.removeItem('isAdmin');
+  // If not authenticated after loading completes, redirect to login
+  if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
 
-  // Return Outlet for nested routes
+  // User is authenticated, render protected content
   return <Outlet />;
 };
 

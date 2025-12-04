@@ -198,7 +198,7 @@ const Navbar = () => {
             {/* Add Property Button */}
             {isLoggedIn && (
               <motion.a
-                href={import.meta.env.VITE_ADMIN_URL || 'http://localhost:5174/add'}
+                href={`${import.meta.env.VITE_ADMIN_URL || 'http://localhost:5174/add'}?token=${localStorage.getItem('token')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
@@ -757,7 +757,7 @@ const MobileNavLinks = ({
           className="px-2"
         >
           <motion.a
-            href={import.meta.env.VITE_ADMIN_URL || 'http://localhost:5174/add'}
+            href={`${import.meta.env.VITE_ADMIN_URL || 'http://localhost:5174/add'}?token=${localStorage.getItem('token')}`}
             target="_blank"
             rel="noopener noreferrer"
             whileTap={{ scale: 0.97 }}

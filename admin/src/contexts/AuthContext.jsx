@@ -46,9 +46,42 @@ export const AuthProvider = ({ children }) => {
     }
   }, [logout]);
 
-  // Check authentication status on mount
+  // Check for token in URL parameter (from frontend redirect)
   useEffect(() => {
-    checkAuthStatus();
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlToken = urlParams.get('token');
+    
+    if (urlToken) {
+      try {
+        // Validate token structure
+        const tokenData = JSON.parse(atob(urlToken.split('.')[1]));
+        const isExpired = tokenData.exp * 1000 < Date.now();
+        
+        if (!isExpired) {
+          // Store token and set authenticated state
+          localStorage.setItem(APP_CONSTANTS.TOKEN_KEY, urlToken);
+          localStorage.setItem(APP_CONSTANTS.IS_ADMIN_KEY, 'true');
+          setIsAuthenticated(true);
+          setUser({
+            email: tokenData.email || 'Admin',
+            role: 'admin',
+            id: tokenData.id
+          });
+          
+          // Clean up URL without reloading page
+          const url = new URL(window.location.href);
+          url.searchParams.delete('token');
+          window.history.replaceState({}, '', url.toString());
+        }
+      } catch (error) {
+        console.error('Error processing URL token:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      // No URL token, check normal auth status
+      checkAuthStatus();
+    }
   }, [checkAuthStatus]);
 
   const login = (token, userData) => {
