@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Mail, Lock, Shield, Building, ArrowRight, Loader2 } from "lucide-react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import AuthContext from "../contexts/AuthContext";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -14,6 +15,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,9 +29,8 @@ const Login = () => {
       });
 
       if (response.data.success) {
-        // Store the admin token
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('isAdmin', 'true');
+        // Use AuthContext login to properly set authentication state
+        login(response.data.token, response.data.user);
         
         toast.success("Welcome back, Admin!");
         navigate("/dashboard");

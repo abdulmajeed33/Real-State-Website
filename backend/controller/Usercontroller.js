@@ -129,7 +129,8 @@ const adminlogin = async (req, res) => {
       // Verify password for registered user
       const isMatch = await bcrypt.compare(password, user.password);
       if (isMatch) {
-        const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        // IMPORTANT: Include user ID in token, not just email
+        const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '30d' });
         return res.json({ token, success: true, user: { name: user.name, email: user.email } });
       } else {
         return res.status(400).json({ message: "Invalid password", success: false });
@@ -138,8 +139,14 @@ const adminlogin = async (req, res) => {
     
     // Fallback to environment variables for super admin
     if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
-      const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1h' });
-      return res.json({ token, success: true });
+      // For env admin, we need to create or find a user record
+      // This is not ideal - better to have all admins in database
+      const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '30d' });
+      return res.json({ 
+        token, 
+        success: true,
+        user: { name: 'Admin', email: email }
+      });
     }
     
     return res.status(400).json({ message: "Invalid credentials", success: false });
