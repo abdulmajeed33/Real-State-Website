@@ -15,10 +15,12 @@ import {
   User,
   ChevronDown
 } from 'lucide-react';
+import { useAuth } from '../hooks/useAuth';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -50,6 +52,15 @@ const Navbar = () => {
   const toggleProfile = () => {
     setIsProfileOpen(!isProfileOpen);
     setIsMenuOpen(false);
+  };
+
+  const getInitials = (name) => {
+    if (!name) return "U";
+    return name
+      .split(" ")
+      .map((word) => word[0])
+      .join("")
+      .toUpperCase();
   };
 
   const navItems = [
@@ -157,12 +168,12 @@ const Navbar = () => {
                 whileTap={{ scale: 0.98 }}
                 className="flex items-center space-x-2 p-2 rounded-xl hover:bg-gray-50 transition-all duration-200"
               >
-                <div className="h-8 w-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                  <User className="h-4 w-4 text-white" />
+                <div className="h-8 w-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
+                  {getInitials(user?.name)}
                 </div>
                 <div className="text-left hidden lg:block">
-                  <div className="text-sm font-medium text-gray-900">Admin</div>
-                  <div className="text-xs text-gray-500">Administrator</div>
+                  <div className="text-sm font-medium text-gray-900">{user?.name || 'Admin'}</div>
+                  <div className="text-xs text-gray-500">{user?.email || 'Administrator'}</div>
                 </div>
                 <ChevronDown className={`h-4 w-4 text-gray-500 transition-transform duration-200 ${
                   isProfileOpen ? 'rotate-180' : ''
@@ -257,12 +268,12 @@ const Navbar = () => {
               {/* Mobile Profile Section */}
               <motion.div variants={itemVariants} className="pt-4 border-t border-gray-200">
                 <div className="flex items-center px-4 py-3 mb-2">
-                  <div className="h-10 w-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
-                    <User className="h-5 w-5 text-white" />
+                  <div className="h-10 w-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-lg">
+                    {getInitials(user?.name)}
                   </div>
                   <div className="ml-3">
-                    <div className="text-sm font-medium text-gray-900">Admin</div>
-                    <div className="text-xs text-gray-500">Administrator</div>
+                    <div className="text-sm font-medium text-gray-900">{user?.name || 'Admin'}</div>
+                    <div className="text-xs text-gray-500">{user?.email || 'Administrator'}</div>
                   </div>
                 </div>
                 

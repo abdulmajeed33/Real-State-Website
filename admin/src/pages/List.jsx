@@ -39,7 +39,12 @@ const PropertyListings = () => {
   const fetchProperties = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${backendurl}/api/products/list`);
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`${backendurl}/api/products/list`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       if (response.data.success) {
         const parsedProperties = response.data.property.map(property => ({
           ...property,
@@ -83,8 +88,13 @@ const PropertyListings = () => {
   const handleRemoveProperty = async (propertyId, propertyTitle) => {
     if (window.confirm(`Are you sure you want to remove "${propertyTitle}"?`)) {
       try {
+        const token = localStorage.getItem('token');
         const response = await axios.post(`${backendurl}/api/products/remove`, {
           id: propertyId
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
         });
 
         if (response.data.success) {

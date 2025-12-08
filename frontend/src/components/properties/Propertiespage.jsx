@@ -34,7 +34,7 @@ const PropertiesPage = () => {
   const fetchProperties = async () => {
     try {
       setPropertyState((prev) => ({ ...prev, loading: true }));
-      const response = await axios.get(`${Backendurl}/api/products/list`);
+      const response = await axios.get(`${Backendurl}/api/products/public/list`);
       if (response.data.success) {
         setPropertyState((prev) => ({
           ...prev,

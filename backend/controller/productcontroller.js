@@ -28,7 +28,7 @@ const addproperty = async (req, res) => {
             })
         );
 
-        // Create a new product
+        // Create a new product with userId from authenticated user
         const product = new Property({
             title,
             location,
@@ -41,7 +41,8 @@ const addproperty = async (req, res) => {
             description,
             amenities,
             image: imageUrls,
-            phone
+            phone,
+            userId: req.user._id
         });
 
         // Save the product to the database
@@ -56,7 +57,19 @@ const addproperty = async (req, res) => {
 
 const listproperty = async (req, res) => {
     try {
-        const property = await Property.find();
+        // Only get properties for the authenticated user (ADMIN PANEL)
+        const property = await Property.find({ userId: req.user._id }).sort({ createdAt: -1 });
+        res.json({ property, success: true });
+    } catch (error) {
+        console.log("Error listing products: ", error);
+        res.status(500).json({ message: "Server Error", success: false });
+    }
+};
+
+const publicListProperty = async (req, res) => {
+    try {
+        // Get ALL properties for public browsing (FRONTEND)
+        const property = await Property.find().sort({ createdAt: -1 });
         res.json({ property, success: true });
     } catch (error) {
         console.log("Error listing products: ", error);
@@ -66,9 +79,13 @@ const listproperty = async (req, res) => {
 
 const removeproperty = async (req, res) => {
     try {
-        const property = await Property.findByIdAndDelete(req.body.id);
+        // Only allow user to delete their own property
+        const property = await Property.findOneAndDelete({ 
+            _id: req.body.id, 
+            userId: req.user._id 
+        });
         if (!property) {
-            return res.status(404).json({ message: "Property not found", success: false });
+            return res.status(404).json({ message: "Property not found or you don't have permission to delete it", success: false });
         }
         return res.json({ message: "Property removed successfully", success: true });
     } catch (error) {
@@ -81,10 +98,11 @@ const updateproperty = async (req, res) => {
     try {
         const { id, title, location, price, beds, baths, sqft, type, availability, description, amenities,phone } = req.body;
 
-        const property = await Property.findById(id);
+        // Only allow user to update their own property
+        const property = await Property.findOne({ _id: id, userId: req.user._id });
         if (!property) {
             console.log("Property not found with ID:", id); // Debugging line
-            return res.status(404).json({ message: "Property not found", success: false });
+            return res.status(404).json({ message: "Property not found or you don't have permission to update it", success: false });
         }
 
         if (!req.files) {
@@ -162,4 +180,4 @@ const singleproperty = async (req, res) => {
     }
 };
 
-export { addproperty, listproperty, removeproperty, updateproperty , singleproperty};
+export { addproperty, listproperty, publicListProperty, removeproperty, updateproperty , singleproperty};

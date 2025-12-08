@@ -1,8 +1,12 @@
 import { createContext, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { APP_CONSTANTS } from '../config/constants';
 
 const AuthContext = createContext();
+
+// Get backend URL from environment or use default
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000';
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -16,7 +20,25 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   }, []);
 
-  const checkAuthStatus = useCallback(() => {
+  const fetchUserData = async (token) => {
+    try {
+      const response = await axios.get(`${BACKEND_URL}/api/users/me`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      
+      if (response.data) {
+        return response.data;
+      }
+      return null;
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      return null;
+    }
+  };
+
+  const checkAuthStatus = useCallback(async () => {
     try {
       const token = localStorage.getItem(APP_CONSTANTS.TOKEN_KEY);
       const isAdmin = localStorage.getItem(APP_CONSTANTS.IS_ADMIN_KEY);
@@ -28,11 +50,20 @@ export const AuthProvider = ({ children }) => {
         
         if (!isExpired) {
           setIsAuthenticated(true);
-          setUser({ 
-            email: tokenData.email || 'Admin',
-            role: 'admin',
-            id: tokenData.id
-          });
+          
+          // Fetch full user data from backend
+          const userData = await fetchUserData(token);
+          if (userData) {
+            setUser(userData);
+          } else {
+            // Fallback to token data if API call fails
+            setUser({ 
+              email: tokenData.email || 'Admin',
+              name: tokenData.name || 'Admin',
+              role: 'admin',
+              id: tokenData.id
+            });
+          }
         } else {
           // Token expired, clear storage
           logout();
@@ -52,32 +83,45 @@ export const AuthProvider = ({ children }) => {
     const urlToken = urlParams.get('token');
     
     if (urlToken) {
-      try {
-        // Validate token structure
-        const tokenData = JSON.parse(atob(urlToken.split('.')[1]));
-        const isExpired = tokenData.exp * 1000 < Date.now();
-        
-        if (!isExpired) {
-          // Store token and set authenticated state
-          localStorage.setItem(APP_CONSTANTS.TOKEN_KEY, urlToken);
-          localStorage.setItem(APP_CONSTANTS.IS_ADMIN_KEY, 'true');
-          setIsAuthenticated(true);
-          setUser({
-            email: tokenData.email || 'Admin',
-            role: 'admin',
-            id: tokenData.id
-          });
+      const processTokenAndFetchUser = async () => {
+        try {
+          // Validate token structure
+          const tokenData = JSON.parse(atob(urlToken.split('.')[1]));
+          const isExpired = tokenData.exp * 1000 < Date.now();
           
-          // Clean up URL without reloading page
-          const url = new URL(window.location.href);
-          url.searchParams.delete('token');
-          window.history.replaceState({}, '', url.toString());
+          if (!isExpired) {
+            // Store token and set authenticated state
+            localStorage.setItem(APP_CONSTANTS.TOKEN_KEY, urlToken);
+            localStorage.setItem(APP_CONSTANTS.IS_ADMIN_KEY, 'true');
+            setIsAuthenticated(true);
+            
+            // Fetch full user data from backend
+            const userData = await fetchUserData(urlToken);
+            if (userData) {
+              setUser(userData);
+            } else {
+              // Fallback to token data if API call fails
+              setUser({
+                email: tokenData.email || 'Admin',
+                name: tokenData.name || 'Admin',
+                role: 'admin',
+                id: tokenData.id
+              });
+            }
+            
+            // Clean up URL without reloading page
+            const url = new URL(window.location.href);
+            url.searchParams.delete('token');
+            window.history.replaceState({}, '', url.toString());
+          }
+        } catch (error) {
+          console.error('Error processing URL token:', error);
+        } finally {
+          setIsLoading(false);
         }
-      } catch (error) {
-        console.error('Error processing URL token:', error);
-      } finally {
-        setIsLoading(false);
-      }
+      };
+      
+      processTokenAndFetchUser();
     } else {
       // No URL token, check normal auth status
       checkAuthStatus();

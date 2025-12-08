@@ -100,9 +100,11 @@ const PropertyForm = () => {
         formdata.append(`image${index + 1}`, image);
       });
 
+      const token = localStorage.getItem('token');
       const response = await axios.post(`${backendurl}/api/products/add`, formdata, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`
         }
       });
 

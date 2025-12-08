@@ -28,7 +28,7 @@ const Appointments = () => {
   const fetchAppointments = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${backendurl}/api/appointments/all`, {
+      const response = await axios.get(`${backendurl}/api/admin/appointments`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
 
@@ -52,7 +52,7 @@ const Appointments = () => {
   const handleStatusChange = async (appointmentId, newStatus) => {
     try {
       const response = await axios.put(
-        `${backendurl}/api/appointments/status`,
+        `${backendurl}/api/admin/appointments/status`,
         {
           appointmentId,
           status: newStatus,
@@ -82,7 +82,7 @@ const Appointments = () => {
       }
 
       const response = await axios.put(
-        `${backendurl}/api/appointments/update-meeting`,
+        `${backendurl}/api/admin/appointments/meeting-link`,
         {
           appointmentId,
           meetingLink,

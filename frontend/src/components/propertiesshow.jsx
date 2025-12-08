@@ -223,7 +223,7 @@ const PropertiesShow = () => {
     const fetchProperties = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${Backendurl}/api/products/list`);
+        const response = await axios.get(`${Backendurl}/api/products/public/list`);
         
         if (response.data.success) {
           // Take only the first 6 properties for featured section
