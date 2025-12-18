@@ -399,3 +399,85 @@ export const getPasswordResetTemplate = (resetUrl) => `
     </div>
   </div>
 `;
+
+export const getFeedbackEmailTemplate = (formData) => `
+  <div style="max-width: 600px; margin: 20px auto; font-family: 'Arial', sans-serif; line-height: 1.6;">
+    <!-- Header with Background -->
+    <div style="background: linear-gradient(135deg, #2563eb, #1e40af); padding: 40px 20px; border-radius: 15px 15px 0 0; text-align: center;">
+      <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 700;">New Feedback Received</h1>
+      <p style="color: #ffffff; opacity: 0.9; margin: 10px 0 0 0; font-size: 16px;">Propertia Contact Form</p>
+    </div>
+
+    <!-- Main Content -->
+    <div style="background: #ffffff; padding: 40px 30px; border-radius: 0 0 15px 15px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
+      <!-- Feedback Details -->
+      <div style="background: #f0f7ff; border-left: 4px solid #2563eb; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+        <h2 style="color: #1e40af; margin: 0 0 15px 0; font-size: 20px;">Contact Information</h2>
+        <p style="margin: 8px 0; color: #374151;">
+          <strong>Name:</strong> ${formData.name}
+        </p>
+        <p style="margin: 8px 0; color: #374151;">
+          <strong>Email:</strong> <a href="mailto:${formData.email}" style="color: #2563eb; text-decoration: none;">${formData.email}</a>
+        </p>
+        <p style="margin: 8px 0; color: #374151;">
+          <strong>Phone:</strong> <a href="tel:${formData.phone}" style="color: #2563eb; text-decoration: none;">${formData.phone}</a>
+        </p>
+        <p style="margin: 8px 0; color: #374151;">
+          <strong>Submitted:</strong> ${new Date().toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          })}
+        </p>
+      </div>
+
+      <!-- Message Content -->
+      <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+        <h3 style="color: #1e40af; margin: 0 0 15px 0; font-size: 18px;">Message</h3>
+        <p style="margin: 0; color: #374151; white-space: pre-wrap;">${formData.message}</p>
+      </div>
+
+      <!-- Action Items -->
+      <div style="margin-top: 30px;">
+        <h3 style="color: #1e40af; margin: 0 0 15px 0; font-size: 18px;">Next Steps</h3>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          <li style="margin-bottom: 10px; display: flex; align-items: center;">
+            <span style="display: inline-block; width: 24px; height: 24px; background: #dbeafe; border-radius: 50%; margin-right: 10px; text-align: center; line-height: 24px; color: #2563eb;">1</span>
+            Review the feedback and assess priority
+          </li>
+          <li style="margin-bottom: 10px; display: flex; align-items: center;">
+            <span style="display: inline-block; width: 24px; height: 24px; background: #dbeafe; border-radius: 50%; margin-right: 10px; text-align: center; line-height: 24px; color: #2563eb;">2</span>
+            Respond to the customer within 24 hours
+          </li>
+          <li style="display: flex; align-items: center;">
+            <span style="display: inline-block; width: 24px; height: 24px; background: #dbeafe; border-radius: 50%; margin-right: 10px; text-align: center; line-height: 24px; color: #2563eb;">3</span>
+            Log the feedback in the CRM system
+          </li>
+        </ul>
+      </div>
+
+      <!-- Quick Action Button -->
+      <div style="text-align: center; margin: 35px 0;">
+        <a href="mailto:${formData.email}"
+           style="display: inline-block; padding: 16px 30px; background: linear-gradient(135deg, #2563eb, #1e40af); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);">
+          Reply to ${formData.name}
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div style="text-align: center; margin-top: 30px;">
+      <p style="color: #6b7280; font-size: 14px;">
+        © ${new Date().getFullYear()} Propertia. All rights reserved.
+      </p>
+      <div style="margin-top: 10px;">
+        <a href="https://real-estate-website-sepia-two.vercel.app" style="color: #2563eb; text-decoration: none; margin: 0 10px;">Website</a>
+        <a href="#" style="color: #2563eb; text-decoration: none; margin: 0 10px;">Privacy Policy</a>
+        <a href="#" style="color: #2563eb; text-decoration: none; margin: 0 10px;">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+`;
