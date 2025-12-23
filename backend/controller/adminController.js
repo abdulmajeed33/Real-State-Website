@@ -28,7 +28,7 @@ const formatRecentAppointments = (appointments) => {
 export const getAdminStats = async (req, res) => {
   try {
     const userId = req.user._id;
-    
+
     const [
       totalProperties,
       activeListings,
@@ -38,10 +38,10 @@ export const getAdminStats = async (req, res) => {
       propertyTypeData,
     ] = await Promise.all([
       Property.countDocuments({ userId }),
-      Property.countDocuments({ userId, status: "active" }),
-      Appointment.countDocuments({ 
+      Property.countDocuments({ userId }), // Count all properties as active since status field doesn't exist
+      Appointment.countDocuments({
         propertyId: { $in: await Property.find({ userId }).select('_id') },
-        status: "pending" 
+        status: "pending"
       }),
       getRecentActivity(userId),
       getViewsData(userId),
@@ -84,7 +84,7 @@ const getRecentActivity = async (userId) => {
 
     // Get user's property IDs for appointment filtering
     const userPropertyIds = await Property.find({ userId }).select('_id');
-    
+
     const recentAppointments = await Appointment.find({
       propertyId: { $in: userPropertyIds }
     })
@@ -190,7 +190,7 @@ const getPropertyTypeData = async (userId) => {
 
     const labels = propertyTypes.map((item) => item._id);
     const data = propertyTypes.map((item) => item.count);
-    
+
     const backgroundColors = [
       'rgba(59, 130, 246, 0.8)',  // Blue
       'rgba(16, 185, 129, 0.8)',  // Green
@@ -232,10 +232,10 @@ const getPropertyTypeData = async (userId) => {
 export const getAllAppointments = async (req, res) => {
   try {
     const userId = req.user._id;
-    
+
     // Get user's property IDs
     const userPropertyIds = await Property.find({ userId }).select('_id');
-    
+
     const appointments = await Appointment.find({
       propertyId: { $in: userPropertyIds }
     })
@@ -272,7 +272,7 @@ export const updateAppointmentStatus = async (req, res) => {
 
     // Verify that the property belongs to the authenticated user
     const property = await Property.findOne({ _id: appointment.propertyId._id, userId });
-    
+
     if (!property) {
       return res.status(403).json({
         success: false,
@@ -288,9 +288,8 @@ export const updateAppointmentStatus = async (req, res) => {
     const mailOptions = {
       from: process.env.EMAIL,
       to: appointment.userId.email,
-      subject: `Viewing Appointment ${
-        status.charAt(0).toUpperCase() + status.slice(1)
-      } - Propertia`,
+      subject: `Viewing Appointment ${status.charAt(0).toUpperCase() + status.slice(1)
+        } - Propertia`,
       html: getEmailTemplate(appointment, status),
     };
 
@@ -326,7 +325,7 @@ export const updateAppointmentMeetingLink = async (req, res) => {
 
     // Verify that the property belongs to the authenticated user
     const property = await Property.findOne({ _id: appointment.propertyId._id, userId });
-    
+
     if (!property) {
       return res.status(403).json({
         success: false,
