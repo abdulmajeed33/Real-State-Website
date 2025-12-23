@@ -6,6 +6,7 @@ import { Upload, X } from 'lucide-react';
 
 const PROPERTY_TYPES = ['House', 'Apartment', 'Office', 'Villa'];
 const AVAILABILITY_TYPES = ['rent', 'buy'];
+const AMENITIES = ['Lake View', 'Fireplace', 'Central heating and air conditioning', 'Dock', 'Pool', 'Garage', 'Garden', 'Gym', 'Security system', 'Master bathroom', 'Guest bathroom', 'Home theater', 'Exercise room/gym', 'Covered parking', 'High-speed internet ready'];
 
 const PropertyForm = () => {
   const [formData, setFormData] = useState({
@@ -93,9 +94,7 @@ const PropertyForm = () => {
       formdata.append('sqft', formData.sqft);
       formdata.append('phone', formData.phone);
       formdata.append('availability', formData.availability);
-      formData.amenities.forEach((amenity, index) => {
-        formdata.append(`amenities[${index}]`, amenity);
-      });
+      formdata.append('amenities', JSON.stringify(formData.amenities));
       formData.images.forEach((image, index) => {
         formdata.append(`image${index + 1}`, image);
       });
@@ -324,38 +323,20 @@ const PropertyForm = () => {
               Amenities
             </label>
             <div className="flex flex-wrap gap-2">
-              {formData.amenities.map((amenity, index) => (
-                <div key={index} className="flex items-center">
-                  <input
-                    type="checkbox"
-                    id={`amenity-${index}`}
-                    name="amenities"
-                    value={amenity}
-                    checked={formData.amenities.includes(amenity)}
-                    onChange={() => handleAmenityToggle(amenity)}
-                    className="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
-                  />
-                  <label htmlFor={`amenity-${index}`} className="ml-2 block text-sm text-gray-700">
-                    {amenity}
-                  </label>
-                </div>
+              {AMENITIES.map(amenity => (
+                <button
+                  key={amenity}
+                  type="button"
+                  onClick={() => handleAmenityToggle(amenity)}
+                  className={`px-4 py-2 rounded-md text-sm font-medium ${
+                    formData.amenities.includes(amenity)
+                      ? 'bg-indigo-600 text-white'
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  }`}
+                >
+                  {amenity}
+                </button>
               ))}
-            </div>
-            <div className="mt-4 flex items-center">
-              <input
-                type="text"
-                value={newAmenity}
-                onChange={(e) => setNewAmenity(e.target.value)}
-                placeholder="Add new amenity"
-                className="mt-1 block w-full rounded-md border border-gray-100 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              />
-              <button
-                type="button"
-                onClick={handleAddAmenity}
-                className="ml-2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
-              >
-                Add
-              </button>
             </div>
           </div>
 
