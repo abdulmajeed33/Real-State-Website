@@ -1,6 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { Backendurl } from "../App";
+import useTokenVerification from "../hooks/useTokenVerification";
 
 const AuthContext = createContext(null);
 
@@ -52,12 +53,32 @@ export const AuthProvider = ({ children }) => {
     setUser(userData);
   };
 
-  const logout = () => {
+  const logout = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (token) {
+        // Call backend to blacklist token
+        await axios.post(`${Backendurl}/api/users/logout`, {}, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+      }
+    } catch (error) {
+      console.error('Logout API call failed:', error);
+      // Continue with local logout even if API fails
+    }
+    
+    // Perform local logout
     localStorage.removeItem("token");
     delete axios.defaults.headers.common["Authorization"];
     setIsLoggedIn(false);
     setUser(null);
   };
+
+  // Initialize token verification polling for cross-app logout sync
+  // Checks every 30 seconds if token is still valid
+  useTokenVerification(logout, 30000);
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, user, login, logout, loading }}>

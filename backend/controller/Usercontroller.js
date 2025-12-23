@@ -13,6 +13,10 @@ import { getPasswordResetTemplate } from "../email.js";
 
 const backendurl = process.env.BACKEND_URL;
 
+// Token blacklist for cross-app logout synchronization
+// In production, use Redis or database for persistent storage
+const tokenBlacklist = new Set();
+
 const createtoken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: "30d",
@@ -124,7 +128,7 @@ const adminlogin = async (req, res) => {
 
     // Check if user exists in database
     const user = await userModel.findOne({ email });
-    
+
     if (user) {
       // Verify password for registered user
       const isMatch = await bcrypt.compare(password, user.password);
@@ -136,19 +140,19 @@ const adminlogin = async (req, res) => {
         return res.status(400).json({ message: "Invalid password", success: false });
       }
     }
-    
+
     // Fallback to environment variables for super admin
     if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
       // For env admin, we need to create or find a user record
       // This is not ideal - better to have all admins in database
       const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '30d' });
-      return res.json({ 
-        token, 
+      return res.json({
+        token,
         success: true,
         user: { name: 'Admin', email: email }
       });
     }
-    
+
     return res.status(400).json({ message: "Invalid credentials", success: false });
   } catch (error) {
     console.error(error);
@@ -157,12 +161,49 @@ const adminlogin = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-    try {
-        return res.json({ message: "Logged out", success: true });
-    } catch (error) {
-        console.error(error);
-        return res.json({ message: "Server error", success: false });
+  try {
+    // Extract token from Authorization header
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      const token = authHeader.split(' ')[1];
+      // Add token to blacklist
+      tokenBlacklist.add(token);
+      console.log('[Auth] Token blacklisted:', token.substring(0, 20) + '...');
     }
+    return res.json({ message: "Logged out successfully", success: true });
+  } catch (error) {
+    console.error(error);
+    return res.json({ message: "Server error", success: false });
+  }
+};
+
+// Verify if token is still valid (not blacklisted)
+const verifyToken = async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ valid: false, message: "No token provided" });
+    }
+
+    const token = authHeader.split(' ')[1];
+
+    // Check if token is blacklisted
+    if (tokenBlacklist.has(token)) {
+      console.log('[Auth] Blacklisted token attempted:', token.substring(0, 20) + '...');
+      return res.status(401).json({ valid: false, message: "Token has been revoked" });
+    }
+
+    // Verify JWT signature and expiration
+    try {
+      jwt.verify(token, process.env.JWT_SECRET);
+      return res.json({ valid: true });
+    } catch (jwtError) {
+      return res.status(401).json({ valid: false, message: "Invalid or expired token" });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ valid: false, message: "Server error" });
+  }
 };
 
 // get name and email
@@ -180,4 +221,4 @@ const getname = async (req, res) => {
 
 
 
-export { login, register, forgotpassword, resetpassword, adminlogin, logout, getname };
+export { login, register, forgotpassword, resetpassword, adminlogin, logout, getname, verifyToken };

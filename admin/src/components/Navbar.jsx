@@ -20,7 +20,7 @@ import { useAuth } from '../hooks/useAuth';
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user } = useAuth();
+  const { user, logout } = useAuth(); // Added logout from useAuth
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -38,9 +38,9 @@ const Navbar = () => {
     return location.pathname === path;
   };
   
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('isAdmin');
+  const handleLogout = async () => {
+    // Use AuthContext logout which calls backend API
+    await logout();
     navigate('/login');
   };
   
